@@ -1,3 +1,6 @@
+translateY = 170
+
+
 def setup():
     size(600, 400)
 
@@ -25,12 +28,14 @@ def draw_plane():
     #triangle(110,273,120,200,150,273)
     triangle(50,100,60,27,90,100)
 
-def draw_bird():
-    #draw body
+def draw_bird():     
     fill(250,213,123)
-    ellipse(250,330,50,70)
-    
+    #draw head
     ellipse(250,370,50,50)
+    ellipse(250,160,50,50)
+    
+    #draw body
+    ellipse(200,150,50,70)
     
     #draw eyes
     fill(250,250,250)
@@ -40,7 +45,7 @@ def draw_bird():
 
     #draw beak
     fill(255,165,0)
-    triangle( 260, 390 ,230,390, 250, 400)
+    triangle(260,390,230,390,250,400)
     #draw wing
     fill(250,213,213)
     triangle(230,350,230,330,170,340)
@@ -48,15 +53,24 @@ def draw_bird():
     triangle(270,350,270,330,320,340)
 
 def keyPressed():
-    print(key)
-    
+    global translateY
+    if keyCode == 38:
+        translateY-=10
+        #print(translateY)
+        
+    elif keyCode == 40:
+        translateY+=10
+
 
 #def keyReleased():
-        
+ #   print("keyCode")    
 
 def draw():
-    #print(keyCode)
+    global translateY
+
     background(60,60,200)
-    translate(0,170)
+    #print("translateY: " + str(translateY))
+    translate(0, translateY)
     draw_plane()
     draw_bird()
+    
