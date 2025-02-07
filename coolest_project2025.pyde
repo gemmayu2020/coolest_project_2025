@@ -70,7 +70,10 @@ def draw():
 
     background(60,60,200)
     #print("translateY: " + str(translateY))
+    
+    pushMatrix()
     translate(0, translateY)
     draw_plane()
+    popMatrix()
     draw_bird()
     
