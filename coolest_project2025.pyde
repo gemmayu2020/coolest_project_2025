@@ -67,7 +67,9 @@ def keyPressed():
 
 def draw():
     global translateY
-
+    #print((frameCount%301)+50)
+    bird_x = (frameCount%600)-400
+    #bird_x = frameCount
     background(60,60,200)
     #print("translateY: " + str(translateY))
     
@@ -75,5 +77,10 @@ def draw():
     translate(0, translateY)
     draw_plane()
     popMatrix()
-    draw_bird()
     
+    #print(frameCount)
+    #print(bird_x)
+    pushMatrix()
+    translate(-bird_x,60)
+    draw_bird()
+    popMatrix()
