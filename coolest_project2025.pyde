@@ -12,9 +12,11 @@ def setup():
 
 def draw_plane():
     noStroke()
+    
     #draw box
     fill(250,250,250)
-    rect(0,-70,190,170)    
+    rect(0,-70,190,170)
+        
     #draw nose of plane
     fill(250,213,123)
     #ellipse(200,200,30,60)
@@ -23,10 +25,12 @@ def draw_plane():
     fill(250,213,123)
     #ellipse(220,215,60,30)
     ellipse(160,42,60,30)
+    
     #draw body of plane
     fill(231,0,231)
     #rect(60,173,150,55)
     rect(0,0,150,55)
+    
     #draw wings
     fill(132,132,132)
     #triangle(120,100,110,173,150,173)
@@ -34,7 +38,6 @@ def draw_plane():
     fill(132,132,132)
     #triangle(110,273,120,200,150,273)
     triangle(50,100,60,27,90,100)
-    
     
     
 def draw_bird():     
@@ -59,7 +62,12 @@ def draw_bird():
     triangle(-20,-80,-25,-30,-80,-60) # left wing
     triangle(10,-80,5,-30,80,-60) # right wing
 
-
+def collision_detection (rectTopLeftX, rectTopLeftY, rectWidth, rectHeight, dotX, dotY):
+    if dotX <= rectTopLeftX+rectWidth and dotY <= rectTopLeftY+rectHeight and dotX >= rectTopLeftX and dotY >= rectTopLeftY:    
+        return True
+    else:
+        return False
+        
 
 def keyPressed():
     global translateY
@@ -69,33 +77,29 @@ def keyPressed():
         
     elif keyCode == 40:
         translateY+=10
-
-
-
-
-#def keyReleased():
- #   print("keyCode")    
+ 
 
 def draw():
     global translateY, safe, planeX
     #print((frameCount%301)+50)
     safe = color(60,60,200)
     #birdX = (frameCount%600)-400
-    birdX=270
+    birdX=269
     background(safe)
-    #print("translateY: " + str(translateY))
-     
+    
     pushMatrix()
     translate(0, translateY)
     draw_plane()
     popMatrix()
+        
+    wingX = birdX - 80
+    wingY = birdY - 60
+    realPlaneY = translateY - 70
+    print(planeX, realPlaneY, planeWidth, planeHeight, wingX, wingY)
     
-    #print(planeX, translateY, planeWidth, planeHeight)
-    wingX=birdX-80
-    print(wingX,wingY)
-    #print(frameCount)
-    #print(bird_x)
+    detect_collision=collision_detection(planeX, realPlaneY, planeWidth, planeHeight, wingX, wingY)
+    print(detect_collision)
     pushMatrix()
-    translate(birdX,birdY)
+    translate(birdX, birdY)
     draw_bird()
     popMatrix()
